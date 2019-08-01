@@ -4,5 +4,4 @@ public interface KundeRepository {
 
     void save(Kunde kunde);
 
-    Kunde find(Kundennummer kundennummer);
 }
