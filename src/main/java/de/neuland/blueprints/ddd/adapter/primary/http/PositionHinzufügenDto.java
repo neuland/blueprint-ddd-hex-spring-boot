@@ -1,11 +1,11 @@
 package de.neuland.blueprints.ddd.adapter.primary.http;
 
-import lombok.Data;
+import lombok.Value;
 
-@Data
+@Value
 public class PositionHinzufügenDto {
 
-    private String artikelId;
-    private String anzahl;
+    String artikelId;
+    String anzahl;
 
 }

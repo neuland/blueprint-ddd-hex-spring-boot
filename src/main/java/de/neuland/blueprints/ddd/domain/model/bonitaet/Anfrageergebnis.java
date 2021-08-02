@@ -2,7 +2,7 @@ package de.neuland.blueprints.ddd.domain.model.bonitaet;
 
 public class Anfrageergebnis {
 
-    private String ergebnis;
+    private final String ergebnis;
 
     public Anfrageergebnis(String ergebnis) {
         this.ergebnis = ergebnis;

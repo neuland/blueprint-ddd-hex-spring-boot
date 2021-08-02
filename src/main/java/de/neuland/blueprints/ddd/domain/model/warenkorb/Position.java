@@ -1,6 +1,6 @@
 package de.neuland.blueprints.ddd.domain.model.warenkorb;
 
-import de.neuland.blueprints.ddd.domain.model.Entity;
+import de.neuland.blueprints.ddd.domain.model.annotations.Entity;
 
 @Entity
 public class Position {

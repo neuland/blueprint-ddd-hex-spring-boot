@@ -1,6 +1,8 @@
 package de.neuland.blueprints.ddd.adapter.secondary.persistence;
 
-import de.neuland.blueprints.ddd.domain.model.bonitaet.*;
+import de.neuland.blueprints.ddd.domain.model.bonitaet.Anfrageergebnis;
+import de.neuland.blueprints.ddd.domain.model.bonitaet.BonitaetspruefungPort;
+import de.neuland.blueprints.ddd.domain.model.bonitaet.Zahlart;
 import de.neuland.blueprints.ddd.domain.model.warenkorb.Gesamtsumme;
 import org.springframework.stereotype.Component;
 

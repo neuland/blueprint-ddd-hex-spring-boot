@@ -20,7 +20,7 @@ public class ZahlartController {
 
     @PutMapping("/zahlart")
     public ResponseEntity waehleZahlart(String warenkorbId, String zahlartId) {
-        final ZahlartWaehlenCommand command = new ZahlartWaehlenCommand(warenkorbId, zahlartId);
+        var command = new ZahlartWaehlenCommand(warenkorbId, zahlartId);
         ResponseEntity responseEntity;
         try {
             applicationService.waehleZahlart(command);

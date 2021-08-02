@@ -1,15 +1,13 @@
 package de.neuland.blueprints.ddd.adapter.primary.http;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Value;
 
 import java.util.List;
 
-@Getter
-@AllArgsConstructor
+@Value
 class WarenkorbDto {
 
-    private String warenkorbId;
-    private List<PositionDto> positionen;
+    String warenkorbId;
+    List<PositionDto> positionen;
 
 }

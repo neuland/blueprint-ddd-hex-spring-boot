@@ -1,9 +1,9 @@
 package de.neuland.blueprints.ddd.domain.model.bonitaet;
 
+import de.neuland.blueprints.ddd.domain.model.annotations.DomainService;
 import de.neuland.blueprints.ddd.domain.model.warenkorb.Warenkorb;
-import org.springframework.stereotype.Service;
 
-@Service
+@DomainService
 public class BonitaetspruefungService {
 
     public Pruefungsergebnis pruefe(Anfrageergebnis anfrageergebnis, Warenkorb warenkorb) {

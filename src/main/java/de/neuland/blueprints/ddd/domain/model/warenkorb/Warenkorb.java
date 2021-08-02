@@ -1,10 +1,11 @@
 package de.neuland.blueprints.ddd.domain.model.warenkorb;
 
-import de.neuland.blueprints.ddd.domain.model.Entity;
 import de.neuland.blueprints.ddd.domain.model.Identity;
+import de.neuland.blueprints.ddd.domain.model.annotations.Entity;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class Warenkorb {
@@ -21,7 +22,7 @@ public class Warenkorb {
     }
 
     public Position positionHinzufügen(ArtikelId artikelId, Anzahl anzahl) throws PositionHinzufügenException {
-        if (artikelId == null || anzahl == null || anzahl.value() > 10)
+        if (artikelId == null || anzahl == null || anzahl.getValue() > 10)
             throw new PositionHinzufügenException();
 
         final PositionId positionId = new PositionId(UUID.randomUUID().toString().substring(0, 5));

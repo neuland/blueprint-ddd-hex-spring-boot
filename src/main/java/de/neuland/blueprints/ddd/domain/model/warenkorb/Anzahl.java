@@ -1,21 +1,16 @@
 package de.neuland.blueprints.ddd.domain.model.warenkorb;
 
+
 import de.neuland.blueprints.ddd.domain.model.ValueObject;
 
-@ValueObject
-public class Anzahl {
+public class Anzahl extends ValueObject<Integer> {
 
-
-    private int value;
-
-    public Anzahl(String value) {
-        if (value == null)
-            throw new IllegalArgumentException("'value' must not be 0");
-        this.value = Integer.valueOf(value);
+    private Anzahl(int value) {
+        super(value);
     }
 
-    public int value() {
-        return value;
+    public Anzahl(String value) {
+        this(Integer.parseInt(value));
     }
 
 }

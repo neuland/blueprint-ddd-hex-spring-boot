@@ -1,7 +1,7 @@
 package de.neuland.blueprints.ddd.domain.model.kunde;
 
-import de.neuland.blueprints.ddd.domain.model.Entity;
 import de.neuland.blueprints.ddd.domain.model.Identity;
+import de.neuland.blueprints.ddd.domain.model.annotations.Entity;
 
 @Entity
 public class Kunde {

@@ -19,7 +19,7 @@ public class MessagingKundeAdapter {
 
     @Scheduled(fixedDelay = 30000L)
     public void receive() {
-        final KundeApplicationService.KundeAnlegenCommand command = new KundeApplicationService.KundeAnlegenCommand(UUID.randomUUID().toString(), "Mustermann");
+        var command = new KundeApplicationService.KundeAnlegenCommand(UUID.randomUUID().toString(), "Mustermann");
         applicationService.anlegen(command);
     }
 

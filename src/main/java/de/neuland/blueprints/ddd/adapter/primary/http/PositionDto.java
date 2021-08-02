@@ -1,12 +1,11 @@
 package de.neuland.blueprints.ddd.adapter.primary.http;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Value;
 
-@Getter
-@AllArgsConstructor
+@Value
 public class PositionDto {
 
-    private String artikelId;
-    private String anzahl;
+    String artikelId;
+    String anzahl;
+
 }

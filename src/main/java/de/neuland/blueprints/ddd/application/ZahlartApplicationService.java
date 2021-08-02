@@ -1,16 +1,20 @@
 package de.neuland.blueprints.ddd.application;
 
 import de.neuland.blueprints.ddd.domain.model.EntityNotFoundException;
-import de.neuland.blueprints.ddd.domain.model.bonitaet.*;
-import de.neuland.blueprints.ddd.domain.model.warenkorb.*;
+import de.neuland.blueprints.ddd.domain.model.bonitaet.BonitaetspruefungPort;
+import de.neuland.blueprints.ddd.domain.model.bonitaet.BonitaetspruefungService;
+import de.neuland.blueprints.ddd.domain.model.bonitaet.Pruefungsergebnis;
+import de.neuland.blueprints.ddd.domain.model.bonitaet.Zahlart;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.WarenkorbId;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.WarenkorbRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ZahlartApplicationService {
 
-    private BonitaetspruefungPort bonitaetspruefungPort;
-    private WarenkorbRepository warenkorbRepository;
-    private BonitaetspruefungService bonitaetspruefungService;
+    private final BonitaetspruefungPort bonitaetspruefungPort;
+    private final WarenkorbRepository warenkorbRepository;
+    private final BonitaetspruefungService bonitaetspruefungService;
 
     public ZahlartApplicationService(BonitaetspruefungPort bonitaetspruefungPort, WarenkorbRepository warenkorbRepository, BonitaetspruefungService bonitaetspruefungService) {
         this.bonitaetspruefungPort = bonitaetspruefungPort;
@@ -19,20 +23,19 @@ public class ZahlartApplicationService {
     }
 
     public Pruefungsergebnis waehleZahlart(ZahlartWaehlenCommand command) throws EntityNotFoundException {
-        final WarenkorbId warenkorbId = new WarenkorbId(command.warenkorbId);
-        final Zahlart zahlart = new Zahlart(command.zahlartId);
+        var warenkorbId = new WarenkorbId(command.warenkorbId);
+        var zahlart = new Zahlart(command.zahlartId);
 
-        final Warenkorb warenkorb = warenkorbRepository.find(warenkorbId);
-        final Gesamtsumme gesamtsumme = warenkorb.gesamtsumme();
-        final Anfrageergebnis anfrageergebnis = bonitaetspruefungPort.pruefeBonitaet(gesamtsumme, zahlart);
+        var warenkorb = warenkorbRepository.find(warenkorbId);
+        var gesamtsumme = warenkorb.gesamtsumme();
+        var anfrageergebnis = bonitaetspruefungPort.pruefeBonitaet(gesamtsumme, zahlart);
         warenkorbRepository.save(warenkorb);
-        final Pruefungsergebnis pruefungsergebnis = bonitaetspruefungService.pruefe(anfrageergebnis, warenkorb);
-        return pruefungsergebnis;
+        return bonitaetspruefungService.pruefe(anfrageergebnis, warenkorb);
     }
 
     public static class ZahlartWaehlenCommand {
 
-        private String warenkorbId;
+        private final String warenkorbId;
         private final String zahlartId;
 
         public ZahlartWaehlenCommand(String warenkorbId, String zahlartId) {

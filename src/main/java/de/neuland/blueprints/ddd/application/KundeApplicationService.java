@@ -1,22 +1,23 @@
 package de.neuland.blueprints.ddd.application;
 
-import de.neuland.blueprints.ddd.domain.model.kunde.*;
+import de.neuland.blueprints.ddd.domain.model.kunde.Kunde;
+import de.neuland.blueprints.ddd.domain.model.kunde.KundeRepository;
+import de.neuland.blueprints.ddd.domain.model.kunde.Kundennummer;
 import org.springframework.stereotype.Service;
 
 @Service
 public class KundeApplicationService {
 
-    private KundeRepository kundeRepository;
+    private final KundeRepository kundeRepository;
 
     public KundeApplicationService(KundeRepository kundeRepository) {
         this.kundeRepository = kundeRepository;
     }
 
     public void anlegen(KundeAnlegenCommand command) {
-        final Kundennummer kundennummer = new Kundennummer(command.id);
-        final String name = command.name;
-
-        final Kunde kunde = new Kunde(kundennummer, name);
+        var kundennummer = new Kundennummer(command.id);
+        var name = command.name;
+        var kunde = new Kunde(kundennummer, name);
         kundeRepository.save(kunde);
     }
 

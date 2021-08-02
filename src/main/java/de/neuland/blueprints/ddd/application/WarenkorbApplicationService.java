@@ -1,7 +1,12 @@
 package de.neuland.blueprints.ddd.application;
 
 import de.neuland.blueprints.ddd.domain.model.EntityNotFoundException;
-import de.neuland.blueprints.ddd.domain.model.warenkorb.*;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.Anzahl;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.ArtikelId;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.PositionHinzufügenException;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.Warenkorb;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.WarenkorbId;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.WarenkorbRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,17 +25,17 @@ public class WarenkorbApplicationService {
     }
 
     public void positionHinzufügen(PositionHinzufügenCommand command) throws EntityNotFoundException, PositionHinzufügenException {
-        final Anzahl anzahl = new Anzahl(command.anzahl);
-        final ArtikelId artikelId = new ArtikelId(command.artikelId);
-        final WarenkorbId warenkorbId = new WarenkorbId(command.warenkorbId);
+        var anzahl = new Anzahl(command.anzahl);
+        var artikelId = new ArtikelId(command.artikelId);
+        var warenkorbId = new WarenkorbId(command.warenkorbId);
 
-        final Warenkorb warenkorb = warenkorbRepository.find(warenkorbId);
+        var warenkorb = warenkorbRepository.find(warenkorbId);
         warenkorb.positionHinzufügen(artikelId, anzahl);
         warenkorbRepository.save(warenkorb);
     }
 
     public Warenkorb warenkorbErzeugen() {
-        final Warenkorb warenkorb = new Warenkorb();
+        var warenkorb = new Warenkorb();
         warenkorbRepository.save(warenkorb);
         return warenkorb;
     }

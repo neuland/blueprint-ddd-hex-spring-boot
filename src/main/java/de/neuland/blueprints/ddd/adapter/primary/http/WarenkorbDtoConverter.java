@@ -4,7 +4,6 @@ import de.neuland.blueprints.ddd.domain.model.warenkorb.Position;
 import de.neuland.blueprints.ddd.domain.model.warenkorb.Warenkorb;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -12,15 +11,15 @@ import java.util.stream.Collectors;
 class WarenkorbDtoConverter {
 
     WarenkorbDto convert(Warenkorb warenkorb) {
-        final List<Position> positionen = warenkorb.positionen();
-        final List<PositionDto> positionDtos = positionen.stream().map(convert()).collect(Collectors.toList());
-        return new WarenkorbDto(warenkorb.warenkorbId().value(), positionDtos);
+        var positionen = warenkorb.positionen();
+        var positionDtos = positionen.stream().map(convert()).collect(Collectors.toList());
+        return new WarenkorbDto(warenkorb.warenkorbId().getValue(), positionDtos);
     }
 
     private Function<Position, PositionDto> convert() {
         return position -> {
-            final String artikelId = position.artikelId().value();
-            final int anzahl = position.anzahl().value();
+            var artikelId = position.artikelId().getValue();
+            var anzahl = position.anzahl().getValue();
             return new PositionDto(artikelId, String.valueOf(anzahl));
         };
     }

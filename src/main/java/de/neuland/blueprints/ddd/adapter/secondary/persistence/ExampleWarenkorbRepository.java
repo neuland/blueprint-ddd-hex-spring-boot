@@ -1,36 +1,38 @@
 package de.neuland.blueprints.ddd.adapter.secondary.persistence;
 
 import de.neuland.blueprints.ddd.domain.model.EntityNotFoundException;
-import de.neuland.blueprints.ddd.domain.model.warenkorb.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.Warenkorb;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.WarenkorbId;
+import de.neuland.blueprints.ddd.domain.model.warenkorb.WarenkorbRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
+@Slf4j
 @Repository
 class ExampleWarenkorbRepository implements WarenkorbRepository {
 
-    private final static Logger LOG = LoggerFactory.getLogger(ExampleWarenkorbRepository.class);
-
-    private Map<WarenkorbId, Warenkorb> warenkörbe = new HashMap<>();
+    private final Map<WarenkorbId, Warenkorb> warenkoerbe = new HashMap<>();
 
     @Override
     public void save(Warenkorb warenkorb) {
-        warenkörbe.put(warenkorb.warenkorbId(), warenkorb);
-        LOG.info("Warenkorb gespeichert");
+        warenkoerbe.put(warenkorb.warenkorbId(), warenkorb);
+        log.info("Warenkorb gespeichert");
     }
 
     @Override
     public Warenkorb find(WarenkorbId warenkorbId) throws EntityNotFoundException {
-        return findAsOption(warenkorbId).orElseThrow(() -> new EntityNotFoundException(Warenkorb.class, warenkorbId.value()));
+        return findAsOption(warenkorbId).orElseThrow(() -> new EntityNotFoundException(Warenkorb.class, warenkorbId.getValue()));
     }
 
     @Override
     public Optional<Warenkorb> findAsOption(WarenkorbId warenkorbId) {
-        final Warenkorb warenkorb = warenkörbe.getOrDefault(warenkorbId, null);
+        var warenkorb = warenkoerbe.getOrDefault(warenkorbId, null);
         if (warenkorb != null)
-            LOG.info("Warenkorb gefunden");
+            log.info("Warenkorb gefunden");
         return Optional.ofNullable(warenkorb);
     }
 }
